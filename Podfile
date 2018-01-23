@@ -8,7 +8,7 @@ target 'WeatherReportPOC' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'AlamofireSwiftyJSON'
-  
+   pod 'SDWebImage'
   # Pods for WeatherReportPOC
 
   target 'WeatherReportPOCTests' do

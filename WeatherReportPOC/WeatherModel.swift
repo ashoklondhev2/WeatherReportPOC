@@ -9,7 +9,8 @@
 import Foundation
 
 class WeatherModel {
-     var date: Double?
+     var date: String?
+     var day: String?
      var temp: String?
      var location: String?
      var description: String?

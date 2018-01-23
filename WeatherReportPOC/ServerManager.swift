@@ -122,7 +122,7 @@ class ServerManager {
         }}
         func getWeatherData(lat: CGFloat, log: CGFloat, closure: @escaping (Result<JSON, Error>) -> Void) {
             
-            let path = "https://v2-weather-api.herokuapp.com/weather/london/uk"
+            let path = "https://v2-weather-api.herokuapp.com/weather/mumbai/In"
             print(path)
             
             let url = URL(string: path)

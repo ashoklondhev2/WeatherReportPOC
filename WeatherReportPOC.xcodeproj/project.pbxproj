@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2289D0B50D550DA399A66604 /* Pods_WeatherReportPOCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6EA1DA0A6445AE4A83299C5 /* Pods_WeatherReportPOCTests.framework */; };
 		67B700EE26FFFAB0480694FA /* Pods_WeatherReportPOC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB46FE38ED6D3EE7CD2E837E /* Pods_WeatherReportPOC.framework */; };
+		F7987D73201708C300B623B8 /* JSONMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7987D72201708C300B623B8 /* JSONMapper.swift */; };
+		F7987D792017190C00B623B8 /* WeatherForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7987D772017190C00B623B8 /* WeatherForecastTableViewCell.swift */; };
+		F7987D7A2017190C00B623B8 /* WeatherForecastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7987D782017190C00B623B8 /* WeatherForecastTableViewCell.xib */; };
 		F7DC39A9200F3B1800EA2E5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC39A8200F3B1800EA2E5F /* AppDelegate.swift */; };
 		F7DC39AB200F3B1800EA2E5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DC39AA200F3B1800EA2E5F /* ViewController.swift */; };
 		F7DC39AE200F3B1800EA2E5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7DC39AC200F3B1800EA2E5F /* Main.storyboard */; };
@@ -48,6 +51,9 @@
 		CA3DA0E3B4D9F121D83CC1EA /* Pods_WeatherReportPOCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherReportPOCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D0266985911229B68B6FAB /* Pods-WeatherReportPOC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherReportPOC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherReportPOC/Pods-WeatherReportPOC.debug.xcconfig"; sourceTree = "<group>"; };
 		EB46FE38ED6D3EE7CD2E837E /* Pods_WeatherReportPOC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherReportPOC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7987D72201708C300B623B8 /* JSONMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONMapper.swift; sourceTree = "<group>"; };
+		F7987D772017190C00B623B8 /* WeatherForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastTableViewCell.swift; sourceTree = "<group>"; };
+		F7987D782017190C00B623B8 /* WeatherForecastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherForecastTableViewCell.xib; sourceTree = "<group>"; };
 		F7DC39A5200F3B1800EA2E5F /* WeatherReportPOC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherReportPOC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7DC39A8200F3B1800EA2E5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7DC39AA200F3B1800EA2E5F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +124,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F7987D74201718C100B623B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F7987D772017190C00B623B8 /* WeatherForecastTableViewCell.swift */,
+				F7987D782017190C00B623B8 /* WeatherForecastTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F7DC399C200F3B1700EA2E5F = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +158,7 @@
 		F7DC39A7200F3B1800EA2E5F /* WeatherReportPOC */ = {
 			isa = PBXGroup;
 			children = (
+				F7987D74201718C100B623B8 /* View */,
 				F7DC39A8200F3B1800EA2E5F /* AppDelegate.swift */,
 				F7DC39AA200F3B1800EA2E5F /* ViewController.swift */,
 				F7DC39AC200F3B1800EA2E5F /* Main.storyboard */,
@@ -152,6 +168,7 @@
 				F7DC39D6200F676C00EA2E5F /* ServerManager.swift */,
 				F7FA834520107E58007BAC1D /* DataManager.swift */,
 				F7FA83472010A6CD007BAC1D /* WeatherModel.swift */,
+				F7987D72201708C300B623B8 /* JSONMapper.swift */,
 			);
 			path = WeatherReportPOC;
 			sourceTree = "<group>";
@@ -292,6 +309,7 @@
 			files = (
 				F7DC39B3200F3B1800EA2E5F /* LaunchScreen.storyboard in Resources */,
 				F7DC39B0200F3B1800EA2E5F /* Assets.xcassets in Resources */,
+				F7987D7A2017190C00B623B8 /* WeatherForecastTableViewCell.xib in Resources */,
 				F7DC39AE200F3B1800EA2E5F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,12 +472,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-WeatherReportPOC/Pods-WeatherReportPOC-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireSwiftyJSON/AlamofireSwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireSwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,7 +498,9 @@
 				F7FA834620107E58007BAC1D /* DataManager.swift in Sources */,
 				F7DC39A9200F3B1800EA2E5F /* AppDelegate.swift in Sources */,
 				F7DC39D7200F676C00EA2E5F /* ServerManager.swift in Sources */,
+				F7987D73201708C300B623B8 /* JSONMapper.swift in Sources */,
 				F7FA83482010A6CD007BAC1D /* WeatherModel.swift in Sources */,
+				F7987D792017190C00B623B8 /* WeatherForecastTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
