@@ -122,9 +122,9 @@ class ServerManager {
         }}
         func getWeatherData(city: String, country: String, closure: @escaping (Result<JSON, Error>) -> Void) {
             
-            let path = "https://v2-weather-api.herokuapp.com/weather/" + "\(city)/\(country)"
-            print(path)
-            
+            var path = "https://v2-weather-api.herokuapp.com/weather/" + "\(city)/\(country)"
+           
+            path = path.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
             let url = URL(string: path)
             
             defaultManager.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseSwiftyJSON{

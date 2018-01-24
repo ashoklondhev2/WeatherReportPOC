@@ -64,8 +64,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         
         let nib = UINib(nibName: "WeatherForecastTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
-        
         getWeatherDetails()
+       
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -76,14 +76,40 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     func getWeatherDetails() {
         
-        self.showProgressLoader()
-        DataManager.sharedInstance().getWeather(city: "Mumbai", country: "In") { (result) in
+       
+        let cityCountryString = cityNameTextField.text!
+        
+        var cityNameString = ""
+        var countryString = ""
+        
+        if cityCountryString == "" {
+             cityNameString = "mumbai"
+             countryString = "In"
+        } else {
+            let array = cityCountryString.components(separatedBy: ",")
+            
+            if array.count == 2 {
+                self.showProgressLoader()
+                cityNameString = array[0]
+                countryString = array[1]
+            } else {
+                self.showAlert(title: "Alert" , message: "Please enter city,country")
+                return
+            }
+            
+        }
+        
+        
+        DataManager.sharedInstance().getWeather(city: cityNameString, country: countryString) { (result) in
             print(result)
             self.hideProgressLoader()
             switch result {
             case .success(let weatherList):
                 print(weatherList)
-                
+                if weatherList.count <= 1 {
+                    self.showAlert(title: "Alert", message: "Location not found")
+                    return
+                }
                 let weatherReport = weatherList[0] as WeatherModel
                 self.weatherList = weatherList
                 self.bindData(weatherReport: weatherReport)
@@ -102,8 +128,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     func bindData(weatherReport: WeatherModel) {
         DispatchQueue.main.async {
-            self.tableView.delegate = self
-            self.tableView.dataSource = self
+         
             self.tempDescriptionLabel.text = weatherReport.description
             self.humidityLabel.text = weatherReport.humidity! + " %"
             
@@ -133,7 +158,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
                 
             }
             self.tableView.reloadData()
-            self.view.layoutIfNeeded()
+         
         }
 
     }
@@ -193,6 +218,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         return cell!
     }
     
+    @IBAction func goButtonAction(_ sender: UIButton) {
+        cityNameTextField.resignFirstResponder()
+        if let _ = cityNameTextField.text {
+           getWeatherDetails()
+        } else {
+            self.showAlert(title: "Alert" , message: "Please enter city,country")
+        }
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
 }
 

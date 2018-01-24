@@ -224,22 +224,33 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="WPA-vC-6qp"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W8L-gz-6lD">
-                                <rect key="frame" x="16" y="25" width="343" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please enter city,country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W8L-gz-6lD">
+                                <rect key="frame" x="16" y="25" width="281" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HFo-oN-Bhu"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="selectCityAction:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="2L7-5F-i6b"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="684-4B-wAa"/>
-                                </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnY-j7-Zcg">
+                                <rect key="frame" x="305" y="25" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="ns1-h5-55e"/>
+                                    <constraint firstAttribute="height" constant="30" id="qsW-SZ-9Un"/>
+                                </constraints>
+                                <state key="normal" title="Go">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="goButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Epq-Ln-7Jr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="hnY-j7-Zcg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="2o2-Gk-SuD"/>
                             <constraint firstItem="nqf-ev-4zD" firstAttribute="leading" secondItem="KLc-Ju-jxk" secondAttribute="trailing" constant="33" id="37P-Mo-19Y"/>
                             <constraint firstItem="lFw-v8-dY8" firstAttribute="leading" secondItem="UkJ-Cb-Nma" secondAttribute="leading" id="3rP-7b-oA2"/>
                             <constraint firstItem="HIS-B2-B2x" firstAttribute="trailing" secondItem="lFw-v8-dY8" secondAttribute="trailing" id="4Ju-LD-wl2"/>
@@ -263,8 +274,8 @@
                             <constraint firstItem="yHN-6P-8aO" firstAttribute="trailing" secondItem="jpp-oz-R1L" secondAttribute="trailing" id="FQX-Xt-nWr"/>
                             <constraint firstItem="yHN-6P-8aO" firstAttribute="leading" secondItem="jpp-oz-R1L" secondAttribute="leading" id="HCd-Rs-F8Q"/>
                             <constraint firstItem="EwP-7r-6IO" firstAttribute="trailing" secondItem="4kR-hV-f71" secondAttribute="trailing" id="Hpf-14-U5J"/>
+                            <constraint firstItem="5g5-4T-uaQ" firstAttribute="top" secondItem="hnY-j7-Zcg" secondAttribute="bottom" constant="21" id="ITZ-9V-TsF"/>
                             <constraint firstItem="odq-o0-xIp" firstAttribute="top" secondItem="50w-dB-6RL" secondAttribute="bottom" constant="5" id="JBi-0d-Met"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="W8L-gz-6lD" secondAttribute="trailing" constant="16" id="LM4-b6-mZb"/>
                             <constraint firstItem="4eN-6p-774" firstAttribute="trailing" secondItem="50w-dB-6RL" secondAttribute="trailing" id="Mf7-W9-oAS"/>
                             <constraint firstItem="KLc-Ju-jxk" firstAttribute="leading" secondItem="mYO-eJ-xE5" secondAttribute="leading" id="Muv-s3-7Uf"/>
                             <constraint firstItem="SS5-mJ-dTm" firstAttribute="trailing" secondItem="I78-sr-CvV" secondAttribute="trailing" id="O8X-mh-HSO"/>
@@ -274,6 +285,7 @@
                             <constraint firstItem="nqf-ev-4zD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="168" id="Pr0-98-fhL"/>
                             <constraint firstItem="mYO-eJ-xE5" firstAttribute="baseline" secondItem="HIS-B2-B2x" secondAttribute="baseline" id="Prv-5Y-19r"/>
                             <constraint firstItem="5g5-4T-uaQ" firstAttribute="top" secondItem="ZXx-q0-cra" secondAttribute="top" id="Qya-ta-2DE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hnY-j7-Zcg" secondAttribute="trailing" constant="24" id="S8K-Jk-46g"/>
                             <constraint firstItem="KLc-Ju-jxk" firstAttribute="trailing" secondItem="mYO-eJ-xE5" secondAttribute="trailing" id="TUa-3O-aji"/>
                             <constraint firstItem="ZXx-q0-cra" firstAttribute="top" secondItem="5g5-4T-uaQ" secondAttribute="top" id="U4Z-oK-nNM"/>
                             <constraint firstAttribute="bottom" secondItem="SS5-mJ-dTm" secondAttribute="bottom" constant="447" id="UOA-qQ-zVk"/>
@@ -308,6 +320,7 @@
                             <constraint firstItem="mYO-eJ-xE5" firstAttribute="firstBaseline" secondItem="HIS-B2-B2x" secondAttribute="firstBaseline" id="oeA-Ch-Q0I"/>
                             <constraint firstItem="4eN-6p-774" firstAttribute="top" secondItem="hkH-Ib-AaV" secondAttribute="bottom" constant="2" id="pCg-TB-S0A"/>
                             <constraint firstItem="50w-dB-6RL" firstAttribute="top" secondItem="4eN-6p-774" secondAttribute="bottom" constant="19" id="pcD-3K-Z2D"/>
+                            <constraint firstItem="hnY-j7-Zcg" firstAttribute="leading" secondItem="W8L-gz-6lD" secondAttribute="trailing" constant="8" id="pnc-Rl-4Ps"/>
                             <constraint firstAttribute="bottom" secondItem="Ln0-mf-xnr" secondAttribute="bottom" constant="377" id="qHt-dF-dJx"/>
                             <constraint firstItem="mYO-eJ-xE5" firstAttribute="trailing" secondItem="yHN-6P-8aO" secondAttribute="trailing" id="rGF-C3-PJr"/>
                             <constraint firstItem="lFw-v8-dY8" firstAttribute="trailing" secondItem="UkJ-Cb-Nma" secondAttribute="trailing" id="sEk-Q8-ZsD"/>
@@ -340,7 +353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-142" y="39"/>
+            <point key="canvasLocation" x="-143.19999999999999" y="38.23088455772114"/>
         </scene>
     </scenes>
 </document>
