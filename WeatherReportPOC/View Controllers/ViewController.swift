@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var todaysTemp: UILabel!
@@ -26,6 +26,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     @IBOutlet weak var weatherImageView: UIImageView!
     
+    @IBOutlet weak var cityNameTextField: UITextField!
     
     let activityView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
@@ -42,29 +43,29 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         self.title = "Weather Forecast"
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
-        
+        cityNameTextField.delegate = self
         startLocation = nil
         applyStyleForActivityIndicator()
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startMonitoringSignificantLocationChanges()
-            
-            if let lattitude = locationManager.location?.coordinate.latitude as? CGFloat {
-                userLatitude = lattitude
-            }
-            
-            if let longitude = locationManager.location?.coordinate.longitude as? CGFloat {
-                userLatitude = longitude
-            }
-            
-         //   getWeatherDetails()
-        }
+//        if CLLocationManager.locationServicesEnabled()
+//        {
+//            locationManager.delegate = self
+//            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+//            locationManager.startMonitoringSignificantLocationChanges()
+//
+//            if let lattitude = locationManager.location?.coordinate.latitude as? CGFloat {
+//                userLatitude = lattitude
+//            }
+//
+//            if let longitude = locationManager.location?.coordinate.longitude as? CGFloat {
+//                userLatitude = longitude
+//            }
+//        }
         
         
         let nib = UINib(nibName: "WeatherForecastTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
+        
+        getWeatherDetails()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -74,18 +75,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     }
     
     func getWeatherDetails() {
-        DataManager.sharedInstance().getWeather(lat: userLatitude, long: userLongitude) { (result) in
-            print(result)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let lat = manager.location?.coordinate.latitude
-        let lon = manager.location?.coordinate.longitude
         
         self.showProgressLoader()
-        DataManager.sharedInstance().getWeather(lat: CGFloat(lat!), long: CGFloat(lon!)) { (result) in
+        DataManager.sharedInstance().getWeather(city: "Mumbai", country: "In") { (result) in
             print(result)
             self.hideProgressLoader()
             switch result {
@@ -102,7 +94,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
             }
             
         }
-        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+   
     }
     
     func bindData(weatherReport: WeatherModel) {
@@ -155,7 +150,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     func applyStyleForActivityIndicator() {
         
         activityView.layer.cornerRadius = CGFloat(5)
-        
         activityView.center = CGPoint(x: self.view.frame.width / 2.0 , y: self.view.frame.size.height / 2.0)
         activityView.backgroundColor = UIColor.gray
         activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
@@ -183,6 +177,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     }
     
     
+    @IBAction func selectCityAction(_ sender: UITextField) {
+        
+        
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension

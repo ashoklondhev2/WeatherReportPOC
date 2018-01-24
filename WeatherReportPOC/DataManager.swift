@@ -23,8 +23,8 @@ class DataManager {
     
     // MARK: Sign up API call
     
-    func getWeather(lat: CGFloat, long: CGFloat, closure: @escaping (Result<[WeatherModel],Error>) -> Void) {
-        ServerManager.sharedInstance().getWeatherData(lat: lat, log: long) { (result) in
+    func getWeather(city: String, country: String, closure: @escaping (Result<[WeatherModel],Error>) -> Void) {
+        ServerManager.sharedInstance().getWeatherData(city: city, country: country) { (result) in
             switch result {
             case .success(let response):
                 var weatherList = JSONMapper.weatherMapper(responseJson: response)

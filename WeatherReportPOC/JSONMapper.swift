@@ -119,11 +119,7 @@ class JSONMapper: NSObject {
                 
                 let sunriseDateString = dateFormatter.string(from: sunriseDate)
                 tempWeather.sunrise = "\(sunriseDateString)"
-                
-              
-                
-                
-                
+
                 let weatherDateString = weather.1["dt_txt"].stringValue
                 tempWeather.date =  weatherDateString
                 
@@ -142,6 +138,10 @@ class JSONMapper: NSObject {
            
         }
         return weatherList
+    }
+    
+    func mapData()   {
+        
     }
     
     
