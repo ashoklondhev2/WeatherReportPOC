@@ -21,7 +21,7 @@ class DataManager {
         return Static.sharedInstance
     }
     
-    // MARK: Sign up API call
+
     
     func getWeather(city: String, country: String, closure: @escaping (Result<[WeatherModel],Error>) -> Void) {
         ServerManager.sharedInstance().getWeatherData(city: city, country: country) { (result) in
@@ -39,5 +39,6 @@ class DataManager {
             }
         }
     }
+
     
 }

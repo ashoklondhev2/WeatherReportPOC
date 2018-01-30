@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var todaysTemp: UILabel!
@@ -46,45 +46,27 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         cityNameTextField.delegate = self
         startLocation = nil
         applyStyleForActivityIndicator()
-//        if CLLocationManager.locationServicesEnabled()
-//        {
-//            locationManager.delegate = self
-//            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-//            locationManager.startMonitoringSignificantLocationChanges()
-//
-//            if let lattitude = locationManager.location?.coordinate.latitude as? CGFloat {
-//                userLatitude = lattitude
-//            }
-//
-//            if let longitude = locationManager.location?.coordinate.longitude as? CGFloat {
-//                userLatitude = longitude
-//            }
-//        }
-        
-        
         let nib = UINib(nibName: "WeatherForecastTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
         getWeatherDetails()
-       
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
     
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
     
     func getWeatherDetails() {
-        
-       
+
         let cityCountryString = cityNameTextField.text!
-        
         var cityNameString = ""
         var countryString = ""
-        
+    
         if cityCountryString == "" {
-             cityNameString = "mumbai"
-             countryString = "In"
+            cityNameString = "mumbai"
+            countryString = "In"
         } else {
             let array = cityCountryString.components(separatedBy: ",")
             
@@ -98,7 +80,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
             }
             
         }
-        
         
         DataManager.sharedInstance().getWeather(city: cityNameString, country: countryString) { (result) in
             print(result)
@@ -118,17 +99,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
                 print(error)
                 break
             }
-            
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-   
-    }
+ 
     
     func bindData(weatherReport: WeatherModel) {
         DispatchQueue.main.async {
-         
+            
             self.tempDescriptionLabel.text = weatherReport.description
             self.humidityLabel.text = weatherReport.humidity! + " %"
             
@@ -149,28 +127,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
             
             self.cityLabel.text = weatherReport.location
             self.sunsetLabel.text = weatherReport.sunrise! + "-" + weatherReport.sunset!
-            let weatherUrl = "http://openweathermap.org/img/w/\(weatherReport.weatherImageName!).png"
-            let url = URL(string: weatherUrl)
-            let data = try? Data(contentsOf: url!)
             
-            if let imageData = data {
-                self.weatherImageView.image = UIImage(data: imageData)
-                
-            }
+            
+            let weatherUrl = "\(weatherReport.weatherImageName!)"
+            let url = URL(string: weatherUrl)
+            self.weatherImageView.sd_setImage(with: url, completed: nil)
+            
             self.tableView.reloadData()
-         
+            
         }
+        
+    }
 
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
-        
-    }
-    
     
     func applyStyleForActivityIndicator() {
         
@@ -221,7 +189,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     @IBAction func goButtonAction(_ sender: UIButton) {
         cityNameTextField.resignFirstResponder()
         if let _ = cityNameTextField.text {
-           getWeatherDetails()
+            getWeatherDetails()
         } else {
             self.showAlert(title: "Alert" , message: "Please enter city,country")
         }

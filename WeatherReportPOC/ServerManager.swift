@@ -22,7 +22,6 @@ class ServerManager {
     
     fileprivate var baseURL = "http://api.openweathermap.org/data/2.5/forecast?" // Text url
     let weatherApiKey = "341d265ca5b9129f96a52e9317c6a577"
-   
     let networkReachabilityManager = NetworkReachabilityManager(host: "www.apple.com")
     
     let defaultManager: Alamofire.SessionManager = {
@@ -99,30 +98,10 @@ class ServerManager {
 }
     
     
-    func downloadData(lat: CGFloat, log: CGFloat, closure: @escaping (Result<JSON, Error>) -> Void) {
-        
-        let path = "http://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(log)&appid=\(weatherApiKey)"
-        print(path)
-        
-        let url = URL(string: path)
-        
-        defaultManager.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseSwiftyJSON{
-            response in
-            switch response.result {
-            case .success(let data):
-                if let result = response.result.value {
-                    closure(.success(result))
-                }
-                print(data)
-                
-            case .failure(let error):
-                print(error)
-                closure(.failure(error))
-            }
-        }}
+  
         func getWeatherData(city: String, country: String, closure: @escaping (Result<JSON, Error>) -> Void) {
             
-            var path = "https://v2-weather-api.herokuapp.com/weather/" + "\(city)/\(country)"
+            var path = "https://v2-weather-api.herokuapp.com/forecast/" + "\(city)/\(country)"
            
             path = path.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
             let url = URL(string: path)
@@ -141,35 +120,32 @@ class ServerManager {
                     closure(.failure(error))
                 }
             }
+
+    }
+    
+    
+    func getWeatherModel( closure: @escaping (Result<JSON, Error>) -> Void) {
         
+        var path = "http://192.168.20.73:8080/weather_model"
         
-//        Alamofire.request(url!).responseJSON(completionHandler: {
-//            response in
-//            switch response.result {
-//            case .success(let data):
-//                if let result = response.result.value {
-//                    closure(.success(result))
-//                }
-//                print(data)
-//
-//            case .failure(let error):
-//                print(error)
-//                closure(.failure(error))
-//            }
-//
-////            if let dict = result.value as? JSONStandard, let main = dict["main"] as? JSONStandard, let temp = main["temp"] as? Double, let weatherArray = dict["weather"] as? [JSONStandard], let weather = weatherArray[0]["main"] as? String, let name = dict["name"] as? String, let sys = dict["sys"] as? JSONStandard, let country = sys["country"] as? String, let dt = dict["dt"] as? Double, let humidity = main["humidity"] as? Double, let clouds = dict["clouds"] as? JSONStandard, let perception = clouds["all"] as? Double, let wind = dict["wind"] as? JSONStandard, let windSpeed = wind["speed"] as? Double, let weatherImage = weatherArray[0]["icon"] as? String {
-////
-////                self._temp = String(format: "%.0f °C", temp - 273.15)
-////                self._weather = weather
-////                self._location = "\(name), \(country)"
-////                self._date = dt
-////                self._humidity = "\(humidity)"
-////                self._weatherImageName = weatherImage
-////                self._wind = "\(windSpeed)"
-////                self._perception = "\(perception)"
-////            }
-//
-//        })
+        path = path.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        let url = URL(string: path)
+        
+        defaultManager.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseSwiftyJSON{
+            response in
+            switch response.result {
+            case .success(let data):
+                if let result = response.result.value {
+                    closure(.success(result))
+                }
+                print(data)
+                
+            case .failure(let error):
+                print(error)
+                closure(.failure(error))
+            }
+        }
+        
     }
 
     

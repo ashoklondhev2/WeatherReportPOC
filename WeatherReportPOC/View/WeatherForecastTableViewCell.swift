@@ -36,9 +36,11 @@ class WeatherForecastTableViewCell: UITableViewCell {
     func bindData() {
         self.minTempLabel.text = weatherModel.minTemp! + " °C"
         self.maxTempLabel.text = weatherModel.maxTemp! + " °C"
-        self.dayLabel.text = weatherModel.day!
+        if let day = weatherModel.day {
+            self.dayLabel.text = day
+        }
 
-        let weatherUrl = "http://openweathermap.org/img/w/\(weatherModel.weatherImageName!).png"
+        let weatherUrl = "\(weatherModel.weatherImageName!)"
         let url = URL(string: weatherUrl)
         self.weatherIcon.sd_setImage(with: url , completed: nil)
     }
